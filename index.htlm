@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apprendre le corse</title>
+
+<style>
+body{
+font-family:Arial;
+text-align:center;
+background:#eef4ff;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+max-width:500px;
+margin:auto;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+button{
+padding:10px;
+margin:5px;
+border:none;
+border-radius:10px;
+background:#dbe9ff;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🇨🇵 Apprendre le corse</h1>
+
+<div class="card">
+<h2 id="q"></h2>
+<div id="a"></div>
+<p id="s">XP : 0 | Niveau 1</p>
+</div>
+
+<script>
+
+const quiz=[
+{q:"Bonjour ?",a:["Bonghjornu","Ciao","Salut"],c:0},
+{q:"Merci ?",a:["Grazie","Merci","Mersi"],c:0},
+{q:"Oui ?",a:["Iè","No","Si"],c:0},
+{q:"Non ?",a:["Innò","No","Nan"],c:0},
+{q:"Au revoir ?",a:["A prestu","Ciao","Salut"],c:0}
+];
+
+let i=0;
+let xp=0;
+
+function update(){
+let level=1;
+if(xp>=3) level=2;
+if(xp>=5) level=3;
+
+document.getElementById("s").innerText=
+"XP : "+xp+" | Niveau "+level;
+}
+
+function load(){
+document.getElementById("q").innerText=quiz[i].q;
+
+let d=document.getElementById("a");
+d.innerHTML="";
+
+quiz[i].a.forEach((x,idx)=>{
+let b=document.createElement("button");
+b.innerText=x;
+b.onclick=()=>check(idx);
+d.appendChild(b);
+});
+}
+
+function check(idx){
+if(idx===quiz[i].c) xp++;
+i++;
+update();
+
+if(i<quiz.length) load();
+else document.getElementById("q").innerText="🎉 Bravo !";
+}
+
+load();
+
+</script>
+
+</body>
+</html>
